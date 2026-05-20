@@ -1,0 +1,72 @@
+import java.util.Locale;
+
+class Retangulo {
+    private double altura;
+    private double largura;
+
+    public Retangulo() {
+        this.altura = 1.0;
+        this.largura = 1.0;
+    }
+
+    public double calcularPerimetro() {
+        return 2 * (this.altura + this.largura);
+    }
+
+    public double calcularArea() {
+        return this.altura * this.largura;
+    }
+
+    public double getAltura() {
+        return altura;
+    }
+
+    public void setAltura(double altura) {
+        if (altura > 0.0 && altura < 20.0) {
+            this.altura = altura;
+        } else {
+            System.out.println("Erro: A altura deve ser maior que 0.0 e menor que 20.0! Valor não alterado.");
+        }
+    }
+
+    public double getLargura() {
+        return largura;
+    }
+
+    public void setLargura(double largura) {
+        if (largura > 0.0 && largura < 20.0) {
+            this.largura = largura;
+        } else {
+            System.out.println("Erro: A largura deve ser maior que 0.0 e menor que 20.0! Valor não alterado.");
+        }
+    }
+}
+
+public class Exercicio2 {
+    public static void main(String[] args) {
+        Locale.setDefault(Locale.US);
+
+        System.out.println("--- Testando Retângulo 1 (Valores Padrão) ---");
+        Retangulo r1 = new Retangulo();
+        System.out.println("Altura default: " + r1.getAltura());
+        System.out.println("Largura default: " + r1.getLargura());
+        System.out.println("Área: " + r1.calcularArea());
+        System.out.println("Perímetro: " + r1.calcularPerimetro());
+
+        System.out.println("\n--- Testando Retângulo 2 (Valores Válidos) ---");
+        Retangulo r2 = new Retangulo();
+        r2.setAltura(5.5);
+        r2.setLargura(10.2);
+        System.out.println("Nova Altura: " + r2.getAltura());
+        System.out.println("Nova Largura: " + r2.getLargura());
+        System.out.println("Área calculada: " + r2.calcularArea());
+        System.out.println("Perímetro calculated: " + r2.calcularPerimetro());
+
+        System.out.println("\n--- Testando Validações de Limite (Devem dar erro) ---");
+        r2.setAltura(0.0);   
+        r2.setLargura(25.0); 
+        
+        System.out.println("Altura após tentativa inválida: " + r2.getAltura());
+        System.out.println("Largura após tentativa inválida: " + r2.getLargura());
+    }
+}
