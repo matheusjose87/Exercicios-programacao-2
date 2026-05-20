@@ -1,63 +1,79 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class ListaCompras {
+public class Exercicio1 {
     public static void main(String[] args) {
-        ArrayList<String> lista = new ArrayList<>();
+        ArrayList<String> listaCompras = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
         int opcao = 0;
 
         while (opcao != 4) {
-            System.out.println("\n--- MENU ---");
-            System.out.println("1. Adicionar");
-            System.out.println("2. Listar");
-            System.out.println("3. Remover");
+            System.out.println("\n--- MENU LISTA DE COMPRAS ---");
+            System.out.println("1. Adicionar item");
+            System.out.println("2. Listar itens");
+            System.out.println("3. Remover item");
             System.out.println("4. Sair");
             System.out.print("Escolha uma opção: ");
             
-            opcao = scanner.nextInt();
-            scanner.nextLine(); // Limpa o buffer do teclado
+            if (scanner.hasNextInt()) {
+                opcao = scanner.nextInt();
+                scanner.nextLine(); // Limpar o buffer do teclado
+            } else {
+                System.out.println("Opção inválida! Digite um número.");
+                scanner.nextLine(); // Limpar entrada inválida
+                continue;
+            }
 
             switch (opcao) {
                 case 1:
-                    System.out.print("Digite o item para adicionar: ");
+                    System.out.print("Digite o nome do item para adicionar: ");
                     String item = scanner.nextLine();
-                    lista.add(item);
-                    System.out.println("Item adicionado!");
+                    listaCompras.add(item);
+                    System.out.println("'" + item + "' adicionado com sucesso!");
                     break;
 
                 case 2:
-                    if (lista.isEmpty()) {
+                    System.out.println("\n--- ITENS NA LISTA ---");
+                    if (listaCompras.isEmpty()) {
                         System.out.println("A lista está vazia.");
                     } else {
-                        for (int i = 0; i < lista.size(); i++) {
-                            System.out.println(i + ". " + lista.get(i));
+                        // Exibe os itens com o índice ao lado (ex: 0. Maçã)
+                        for (int i = 0; i < listaCompras.size(); i++) {
+                            System.out.println(i + ". " + listaCompras.get(i));
                         }
                     }
                     break;
 
                 case 3:
-                    if (lista.isEmpty()) {
-                        System.out.println("Nenhum item para remover.");
+                    if (listaCompras.isEmpty()) {
+                        System.out.println("A lista está vazia. Não há o que remover.");
                     } else {
-                        System.out.print("Digite o índice do item a ser removido: ");
-                        int indice = scanner.nextInt();
-                        
-                        if (indice >= 0 && indice < lista.size()) {
-                            lista.remove(indice);
-                            System.out.println("Item removido com sucesso.");
+                        System.out.print("Digite o índice do item que deseja remover: ");
+                        if (scanner.hasNextInt()) {
+                            int indice = scanner.nextInt();
+                            scanner.nextLine(); // Limpar o buffer
+
+                            // Validação para garantir que o índice existe na lista
+                            if (indice >= 0 && indice < listaCompras.size()) {
+                                String removido = listaCompras.remove(indice);
+                                System.out.println("'" + removido + "' foi removido com sucesso!");
+                            } else {
+                                System.out.println("Índice inválido! Digite um número entre 0 e " + (listaCompras.size() - 1));
+                            }
                         } else {
-                            System.out.println("Índice inválido!");
+                            System.out.println("Entrada inválida! Você deve digitar um número inteiro.");
+                            scanner.nextLine();
                         }
                     }
                     break;
 
                 case 4:
-                    System.out.println("Programa encerrado.");
+                    System.out.println("Encerrando o programa. Até logo!");
                     break;
 
                 default:
-                    System.out.println("Opção inválida. Tente novamente.");
+                    System.out.println("Opção inválida! Tente novamente.");
+                    break;
             }
         }
         scanner.close();
